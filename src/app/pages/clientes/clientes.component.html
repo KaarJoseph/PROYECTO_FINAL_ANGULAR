@@ -1,0 +1,25 @@
+<h2>Listado de Personas</h2>
+
+<table>
+  <thead class="tituloTabla" *ngIf="listadoPersonasWS.length !== 0">
+    <tr>
+      <th>Cédula</th>
+      <th>Nombre</th>
+      <th>Ubicación</th>
+      <th>Eliminar</th>
+      <th>Actualizar</th>
+    </tr>
+  </thead>
+  <tbody> 
+    <tr *ngFor="let persona of listadoPersonasWS | async">
+      <td>{{ persona.cedula }}</td>
+      <td>{{ persona.nombre }}</td>
+      <td>{{ persona.direccion }}</td>
+      <td><a class="eliminar" (click)="eliminar(persona.cedula)">Eliminar</a></td>
+      <td><a class="actualizar" (click)="editar(persona)">Actualizar</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<br><br>
+<button (click)="nuevo()">Ingresar nueva persona</button>

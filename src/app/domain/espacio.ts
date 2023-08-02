@@ -1,6 +1,7 @@
-export class Espacio{
-    cedula : string = '';
-    numEspacio : string = '';
-    estado : string = '';
-    costo : String = '';
-}
+export class Espacio {
+    espacioId: number = 0;
+    numEspacio: number = 0;
+    estado: string = '';
+    costo: number = 0;
+  }
+  

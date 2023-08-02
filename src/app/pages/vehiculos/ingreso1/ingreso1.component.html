@@ -1,0 +1,20 @@
+<h2>Gestión de Vehículos</h2>
+<h4>Actualización de Formulario</h4>
+
+<div class="sidebar">
+  <h3>Formulario de vehículo</h3>
+  <form>
+    <label for="placa">Placa:</label>
+    <input type="text" id="placa" [(ngModel)]="vehiculo.placa" name="placa" required>
+    <label for="marca">Marca:</label>
+    <input type="text" id="marca" [(ngModel)]="vehiculo.marca" name="marca" required>
+    <label for="modelo">Modelo:</label>
+    <input type="text" id="modelo" [(ngModel)]="vehiculo.modelo" name="modelo" required>
+    <label for="tipo">Tipo:</label>
+    <input type="text" id="tipo" [(ngModel)]="vehiculo.tipo" name="tipo" required>
+    <label for="cedula">Cédula Propietario:</label>
+    <input type="text" id="cedula" [(ngModel)]="vehiculo.propietario.cedula" name="cedula" required>
+    <br>
+    <button (click)="actualizar()" type="button">Actualizar</button>
+  </form>
+</div>

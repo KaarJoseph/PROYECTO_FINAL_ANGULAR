@@ -1,0 +1,27 @@
+<h2>Listado de Espacios</h2>
+
+<table>
+  <thead class="tituloTabla" *ngIf="listadoEspaciosWS.length !== 0">
+    <tr>
+      <th>Código</th>
+      <th>Número</th>
+      <th>Estado</th>
+      <th>Costo</th>
+      <th>Eliminar</th>
+      <th>Actualizar</th>
+    </tr>
+  </thead>
+  <tbody> 
+    <tr *ngFor="let espacio of listadoEspaciosWS | async">
+      <td>{{ espacio.espacioId }}</td>
+      <td>{{ espacio.numEspacio }}</td>
+      <td>{{ espacio.estado }}</td>
+      <td>{{ espacio.costo }}</td>
+      <td><a class="eliminar" (click)="eliminar(espacio.espacioId)">Eliminar</a></td>
+      <td><a class="actualizar" (click)="editar(espacio)">Actualizar</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<br><br>
+<button (click)="nuevo()">Ingresar nuevo espacio</button>
