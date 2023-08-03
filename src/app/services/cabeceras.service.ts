@@ -18,7 +18,7 @@ export class CabecerasService {
 
   delete(cabeceraId: number) {
     console.log(cabeceraId)
-    return this.http.delete<any>("http://localhost:8080/proyecto/rs/espacios/elim/"+cabeceraId);
+    return this.http.delete<any>("http://localhost:8080/proyecto/rs/cabeceras/elim/"+cabeceraId);
   }
 }
 

@@ -1,0 +1,29 @@
+<table>
+    <thead class="tituloTabla" *ngIf="listadoDetalleWS.length !== 0">
+      <tr>
+        <th>Codigo</th>
+        <th>Fecha de Ingreso</th>
+        <th>Fecha de Salida</th>
+        <th>Vehiculo</th>
+        <th>Eliminar</th>
+        <th>Actualizar</th>
+      </tr>
+    </thead>
+    <tbody> 
+      <tr *ngFor="let detalle of listadoDetalleWS | async">
+        <td>{{ detalle.detalleId }}</td>
+        <td>{{ detalle.fechaIngreso }}</td>
+        <td>{{ detalle.fechaSalida }}</td>
+        <td>{{ detalle.vehiculo.placa}}</td>
+     
+        <td><a class="eliminar" (click)="eliminar(detalle.detalleId)">Eliminar</a></td>
+        <td><a class="actualizar" (click)="editar(detalle)">Actualizar</a></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <br><br>
+  
+  
+  
+  <button (click)="nuevo()">Ingresar nuevo Ticket</button>

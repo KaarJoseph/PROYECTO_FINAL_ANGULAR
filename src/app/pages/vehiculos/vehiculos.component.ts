@@ -1,67 +1,44 @@
 import { Component } from '@angular/core';
+import { Vehiculo } from 'src/app/domain/vehiculo';
+import { VehiculosService } from 'src/app/services/vehiculos.service';
 import { NavigationExtras, Router } from '@angular/router';
-import { Cabecera } from 'src/app/domain/cabecera';
-import { Detalle } from 'src/app/domain/detalle';
-import { CabecerasService } from 'src/app/services/cabeceras.service';
-import { DetallesService } from 'src/app/services/detalles.service';
 
 @Component({
-  selector: 'app-facturas',
-  templateUrl: './facturas.component.html',
-  styleUrls: ['./facturas.component.css']
+  selector: 'app-vehiculos',
+  templateUrl: './vehiculos.component.html',
+  styleUrls: ['./vehiculos.component.css']
 })
-export class FacturasComponent {
-  listadoCabecerasWS: Cabecera[];
-  listadoDetallesWS: Detalle[];
-  detallesVisible: boolean = false;
+export class VehiculosComponent {
+
+  listadoVehiculosWS: any;
 
   constructor(
-    private cabecerasService: CabecerasService,
-    private detallesService: DetallesService,
+    private vehiculosService: VehiculosService,
     private router: Router
   ) {}
 
-  ngOnInit() {
-    this.cabecerasService.getAllCabeceras().subscribe(
-      (cabeceras: Cabecera[]) => {
-        this.listadoCabecerasWS = cabeceras;
-      },
-      (error) => {
-        console.error(error);
+  ngOnInit(): void {
+    this.listadoVehiculosWS = this.vehiculosService.getAll();
+  }
+
+  editar(vehiculo: Vehiculo) {
+    console.log(vehiculo);
+    let params: NavigationExtras = {
+      queryParams: {
+        vehiculo: vehiculo
       }
-    );
+    };
+    this.router.navigate(['pages/vehiculos/ingreso'], params);
   }
 
-  nuevoCabecera() {
-    // Implementa la lógica para agregar una nueva cabecera
+  eliminar(placa: string) {
+    this.vehiculosService.delete(placa).subscribe(() => {
+      console.log("Vehículo eliminado con éxito.");
+      this.ngOnInit();
+    });
   }
 
-  eliminarCabecera(ticketInt: number) {
-    // Implementa la lógica para eliminar una cabecera
-  }
-
-  editarCabecera(cabecera: Cabecera) {
-    // Implementa la lógica para editar una cabecera
-  }
-
-  toggleDetalles(cabecera: Cabecera) {
-    if (!this.detallesVisible) {
-      this.detallesService.getByCabeceraId(cabecera.ticketInt).subscribe(
-        (detalles: Detalle[]) => {
-          this.listadoDetallesWS = detalles;
-          this.detallesVisible = true;
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
-    } else {
-      this.listadoDetallesWS = [];
-      this.detallesVisible = false;
-    }
-  }
-
-  nuevoDetalle() {
-    // Implementa
+  nuevo() {
+    this.router.navigate(['pages/vehiculos/ingreso']);
   }
 }

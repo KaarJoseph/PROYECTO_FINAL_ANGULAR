@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { Cabecera } from 'src/app/domain/cabecera';
 import { CabecerasService } from 'src/app/services/cabeceras.service';
-import { Detalle } from 'src/app/domain/detalle';
-import { DetallesService } from 'src/app/services/detalles.service';
 
 @Component({
   selector: 'app-facturas',
@@ -11,42 +9,42 @@ import { DetallesService } from 'src/app/services/detalles.service';
   styleUrls: ['./facturas.component.css']
 })
 export class FacturasComponent implements OnInit {
-  listadoFacturasWS: Cabecera[] = [];
+
+  listadoCabecerasWS: Cabecera[] = [];
 
   constructor(
-    private router: Router,
     private cabecerasService: CabecerasService,
-    private detallesService: DetallesService
+    private router: Router
   ) {}
 
-  ngOnInit() {
-    this.cargarListadoFacturas();
+  ngOnInit(): void {
+    this.cabecerasService.getAll().subscribe((cabeceras: Cabecera[]) => {
+      this.listadoCabecerasWS = cabeceras.map(cabecera => {
+        cabecera.fechaEmision = new Date(cabecera.fechaEmision);
+        return cabecera;
+      });
+    });
   }
 
-  cargarListadoFacturas() {
-    this.cabecerasService.getAllCabeceras().subscribe(
-      (facturas: Cabecera[]) => {
-        this.listadoFacturasWS = facturas;
-      },
-      (error) => {
-        console.error('Error al cargar el listado de facturas', error);
+  editar(cabecera: Cabecera) {
+    console.log(cabecera);
+    let params: NavigationExtras = {
+      queryParams: {
+        cabecera: cabecera,
+        nombre: 'Joseph'
       }
-    );
+    };
+    this.router.navigate(['pages/cabeceras/ingreso'], params);
   }
 
-  verDetalles(factura: Cabecera) {
-    if (factura.detallesFacturaVisible) {
-      factura.detallesFacturaVisible = false;
-    } else {
-      this.detallesService.getByCabeceraId(factura.ticketInt).subscribe(
-        (detalles: Detalle[]) => {
-          factura.detallesFactura = detalles;
-          factura.detallesFacturaVisible = true;
-        },
-        (error) => {
-          console.error('Error al obtener detalles de factura', error);
-        }
-      );
-    }
+  eliminar(ticketInt: number) {
+    this.cabecerasService.delete(ticketInt).subscribe(() => {
+      console.log("Cabecera eliminada con éxito.");
+      this.ngOnInit(); // Recargamos la lista después de eliminar
+    });
+  }
+
+  nuevo() {
+    this.router.navigate(['pages/cabeceras/ingreso']);
   }
 }
