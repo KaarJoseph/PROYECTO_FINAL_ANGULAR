@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Vehiculo } from 'src/app/domain/vehiculo';
 import { VehiculosService } from 'src/app/services/vehiculos.service';
+
 @Component({
   selector: 'app-ingreso1',
   templateUrl: './ingreso1.component.html',

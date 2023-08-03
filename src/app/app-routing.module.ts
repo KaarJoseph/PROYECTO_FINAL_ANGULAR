@@ -7,6 +7,7 @@ import { FacturasComponent } from './pages/facturas/facturas.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { IngresoComponent } from './pages/clientes/ingreso/ingreso.component';
 import { Ingreso1Component } from './pages/vehiculos/ingreso1/ingreso1.component';
+import { Ingreso2Component } from './pages/espacios/ingreso2/ingreso2.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'pages/inicio', pathMatch: 'full' },
@@ -17,7 +18,7 @@ const routes: Routes = [
   {path:"pages/facturas",component: FacturasComponent},
   {path:"pages/clientes/ingreso",component: IngresoComponent},
   {path:"pages/vehiculos/ingreso",component: Ingreso1Component},
-  {path:"pages/espacio/ingreso",component: Ingreso1Component},
+  {path:"pages/espacios/ingreso",component: Ingreso2Component},
 
 ];
 @NgModule({

@@ -1,1 +1,18 @@
-<p>ingreso2 works!</p>
+<h2>Gestión de Espacios</h2>
+<h4>Actualización de Formulario</h4>
+
+<div class="sidebar">
+  <h3>Formulario de Espacio</h3>
+  <form>
+    <label for="codigo">Código:</label>
+    <input type="number" id="codigo" [(ngModel)]="espacio.espacioId" name="codigo" required>
+    <label for="numero">Número:</label>
+    <input type="number" id="numero" [(ngModel)]="espacio.numEspacio" name="numero" required>
+    <label for="estado">Estado:</label>
+    <input type="text" id="estado" [(ngModel)]="espacio.estado" name="estado" required>
+    <label for="costo">Costo:</label>
+    <input type="number" id="costo" [(ngModel)]="espacio.costo" name="costo" required>
+    <br>
+    <button (click)="actualizar()" type="button">Actualizar</button>
+  </form>
+</div>

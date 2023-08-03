@@ -16,6 +16,8 @@ import { InicioComponent } from './pages/inicio/inicio.component';
 import { IngresoComponent } from './pages/clientes/ingreso/ingreso.component';
 import { Ingreso1Component } from './pages/vehiculos/ingreso1/ingreso1.component';
 import { Ingreso2Component } from './pages/espacios/ingreso2/ingreso2.component';
+import { CabecerasService } from './services/cabeceras.service';
+import { DetallesService } from './services/detalles.service';
 
 
 @NgModule({
@@ -40,7 +42,10 @@ import { Ingreso2Component } from './pages/espacios/ingreso2/ingreso2.component'
     ReactiveFormsModule,
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [
+    CabecerasService, // Asegúrate de que CabeceraService esté aquí
+    DetallesService, // Asegúrate de que DetalleService esté aquí
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
